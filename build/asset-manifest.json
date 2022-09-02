@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.6de062ef.css",
-    "main.js": "/static/js/main.044e44be.js",
-    "index.html": "/index.html",
-    "main.6de062ef.css.map": "/static/css/main.6de062ef.css.map",
-    "main.044e44be.js.map": "/static/js/main.044e44be.js.map"
+    "main.css": "/gridpainter-frontend/static/css/main.6de062ef.css",
+    "main.js": "/gridpainter-frontend/static/js/main.dd661a72.js",
+    "index.html": "/gridpainter-frontend/index.html",
+    "main.6de062ef.css.map": "/gridpainter-frontend/static/css/main.6de062ef.css.map",
+    "main.dd661a72.js.map": "/gridpainter-frontend/static/js/main.dd661a72.js.map"
   },
   "entrypoints": [
     "static/css/main.6de062ef.css",
-    "static/js/main.044e44be.js"
+    "static/js/main.dd661a72.js"
   ]
 }

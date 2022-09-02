@@ -7,7 +7,7 @@ export function ArtGallery() {
 
   async function getArtGallery() {
     let res = await axios.get(
-      'https://gridpainter-grupp4.herokuapp.com/saved_images'
+      'https://grid-painter-backend.herokuapp.com/saved_images'
     );
 
     setArtGallery(res.data);
