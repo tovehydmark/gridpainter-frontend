@@ -1,0 +1,110 @@
+#body {
+  font-family: 'Roboto', sans-serif;
+}
+
+//// LOGIN PAGE ////
+.login-page-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-top: 150px;
+
+  #to-art-gallery-btn {
+    font-family: 'Roboto', sans-serif;
+    width: 150px;
+    padding: 1.5rem;
+    font-size: 1.2rem;
+    min-width: 15%;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    background-color: white;
+    border: 1px solid #22cf29;
+    border-radius: 3px;
+  }
+  #to-art-gallery-btn:hover {
+    cursor: pointer;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    #login-btn {
+      font-family: 'Roboto', sans-serif;
+      margin: 50px auto;
+      padding: 1rem;
+      width: 80%;
+      font-size: 2rem;
+      background-color: #22cf29;
+      border: 0;
+      border-radius: 3px;
+      color: white;
+      cursor: pointer;
+    }
+
+    input:focus {
+      outline: none;
+      border: 1px solid #22cf29;
+    }
+
+    input {
+      font-family: 'Roboto', sans-serif;
+      padding: 1.3rem;
+      font-size: 2rem;
+      text-align: center;
+      border-radius: 3px;
+      border: 1px solid black;
+    }
+  }
+}
+
+//// LOGGED IN VIEW ////
+
+.loggedin-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  position: relative;
+
+  h1 {
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  section {
+    display: flex;
+    flex-direction: row;
+
+    gap: 50px;
+  }
+  .chat-container {
+    width: 100px;
+    background-color: darkblue;
+    position: fixed;
+    right: 0;
+  }
+  button {
+    width: 140px;
+    font-family: 'Roboto', sans-serif;
+    margin: 0 auto;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #22cf29;
+    border: 0;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .button-container {
+    display: flex;
+  }
+}

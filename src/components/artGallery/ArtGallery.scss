@@ -1,0 +1,27 @@
+.grid-tile {
+  border: solid 1px #b9b9b9;
+  background-color: white;
+}
+
+//CSS från denna (ArtGallery-filen) (gäller grid-container) är den som styr pixlarna i Tile och GetImages????
+.grid-container {
+  margin: 0 auto;
+  display: grid;
+  // grid-template-columns: repeat(auto-fit, minmax(40px, 40px));
+  // width: 600px;
+  // height: 600px;
+
+  grid-template-columns: repeat(auto-fit, minmax(22px, 22px));
+  width: 330px;
+  height: 330px;
+
+  border: solid 1px gray;
+  // position: relative;
+  // left: 100px;
+  // top: 100px;
+}
+
+.outer-div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
