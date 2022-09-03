@@ -11,8 +11,8 @@ import { Checkimage } from './components/checkimage/Checkimage';
 
 const io = require('socket.io-client');
 
-// const socket = io.connect('https://grid-painter-backend.herokuapp.com');
-const socket = io.connect('http://localhost:4000');
+const socket = io.connect('https://grid-painter-backend.herokuapp.com');
+// const socket = io.connect('http://localhost:4000');
 
 function App() {
   const [inGame, setInGame] = useState(false);
@@ -55,23 +55,23 @@ function App() {
   }
 
   function saveImg(tilesFromTileJS) {
-    // try {
-    //   axios
-    //     .post('https://grid-painter-backend.herokuapp.com', tilesFromTileJS)
-    //     .then((res) => {
-    //       console.log(res);
-    //     });
-    // } catch (err) {
-    //   console.log(err);
-    // }
-
     try {
-      axios.post('http://localhost:4000', tilesFromTileJS).then((res) => {
-        console.log(res);
-      });
+      axios
+        .post('https://grid-painter-backend.herokuapp.com', tilesFromTileJS)
+        .then((res) => {
+          console.log(res);
+        });
     } catch (err) {
       console.log(err);
     }
+
+    // try {
+    //   axios.post('http://localhost:4000', tilesFromTileJS).then((res) => {
+    //     console.log(res);
+    //   });
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
 
   return (
