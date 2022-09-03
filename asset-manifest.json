@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/gridpainter-frontend/static/css/main.6de062ef.css",
+    "main.js": "/gridpainter-frontend/static/js/main.752bb918.js",
+    "index.html": "/gridpainter-frontend/index.html",
+    "main.6de062ef.css.map": "/gridpainter-frontend/static/css/main.6de062ef.css.map",
+    "main.752bb918.js.map": "/gridpainter-frontend/static/js/main.752bb918.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6de062ef.css",
+    "static/js/main.752bb918.js"
+  ]
+}
