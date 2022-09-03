@@ -11,7 +11,7 @@ import { Checkimage } from './components/checkimage/Checkimage';
 
 const io = require('socket.io-client');
 
-const socket = io.connect('https://grid-painter-backend.herokuapp.com/');
+const socket = io.connect('https://grid-painter-backend.herokuapp.com');
 
 function App() {
   const [inGame, setInGame] = useState(false);
@@ -56,7 +56,7 @@ function App() {
   function saveImg(tilesFromTileJS) {
     try {
       axios
-        .post('https://grid-painter-backend.herokuapp.com/', tilesFromTileJS)
+        .post('https://grid-painter-backend.herokuapp.com', tilesFromTileJS)
         .then((res) => {
           console.log(res);
         });
