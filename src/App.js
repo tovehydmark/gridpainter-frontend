@@ -17,6 +17,7 @@ const socket = io.connect('https://grid-painter-backend.herokuapp.com');
 function App() {
   const [inGame, setInGame] = useState(false);
   const [username, setUsername] = useState('');
+  const [roomName, setRoomName] = useState('');
   const [color, setColor] = useState('');
   const [getImage, setGetImage] = useState(false);
   const [tilesFromTileJS, setTilesFromTileJS] = useState([]);
@@ -26,7 +27,8 @@ function App() {
   });
 
   socket.on('joinedRoom', (response) => {
-    if (response === 'avaliable') {
+    if (response === 'available') {
+      //Här ska det gå att logga in
       setInGame(true);
     } else if (response === 'getImage') {
       //when 4 players are ready
@@ -41,12 +43,17 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    socket.emit('join-game', { username: username, room: 'room0' }, (error) => {
-      if (error) {
-        alert(error);
-      }
-    });
+    if (username) {
+      socket.emit(
+        'join-game',
+        { username: username, roomName: roomName },
+        (error) => {
+          if (error) {
+            alert(error);
+          }
+        }
+      );
+    }
   };
 
   function sendTilesToApp(tiles) {
@@ -83,6 +90,11 @@ function App() {
               placeholder="USERNAME"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              placeholder="ROOM"
+              value={roomName}
+              onChange={(e) => setRoomName(e.target.value)}
             />
             <button id="login-btn">START PAINTING</button>
           </form>
