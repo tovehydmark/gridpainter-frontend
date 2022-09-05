@@ -133,7 +133,12 @@ function App() {
             </div>
           </div>
           <div id="chat-container">
-            <Chat socket={socket} username={username} className="chat" />
+            <Chat
+              socket={socket}
+              username={username}
+              roomName={roomName}
+              className="chat"
+            />
           </div>
         </>
       )}

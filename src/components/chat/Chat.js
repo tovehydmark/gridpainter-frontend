@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import './Chat.scss';
 
-export function Chat({ socket, username }) {
+export function Chat({ socket, username, roomName }) {
   const [msgToBeSent, setMsgToBeSent] = useState('');
   const [allMessages, setAllMessages] = useState([]);
 
@@ -16,6 +16,7 @@ export function Chat({ socket, username }) {
       socket.emit('message', {
         text: msgToBeSent,
         username: username,
+        roomName: roomName,
       });
       setMsgToBeSent('');
     }
