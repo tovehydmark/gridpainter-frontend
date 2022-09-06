@@ -56,12 +56,11 @@ export function Tile({ color, socket, sendTilesToApp }) {
     loopThroughTiles(tileList);
   });
 
-  socket.on('canPaint', function(){
-    setCanPaint(true);
+  socket.on('canPaint', function(param){
+    setCanPaint(param);
   });
 
   socket.on('timerDone', function(){
-    setCanPaint(false);
     socket.emit('created_image', tiles);
   })
 
