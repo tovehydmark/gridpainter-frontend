@@ -9,31 +9,26 @@ export function Checkimage({socket}){
 
     socket.on('default_image', function(img){
         setDefaultImage(img);
-        console.log('default_image:', img);
     });
 
     socket.on('created_image', function(img){
         setCreatedImage(img);
-        console.log('created_image:', img);
     });
 
-    useEffect(() => {
+    socket.on('timerDone', function(){
 
-        if(defaultImage.length > 0 && createdImage.length > 0){
+        let correctPixels = 0;
 
-            let correctPixels = 0;
+        for(let i = 0; i < 225; i++){
 
-            for(let i = 0; i < 225; i++){
-
-                if(defaultImage[i].color == createdImage[i].color){
-                    correctPixels++;
-                }
+            if(defaultImage[i].color == createdImage[i].color){
+                correctPixels++;
             }
-
-            setScore(Math.floor(correctPixels / 225 * 100));
         }
 
-    }, [defaultImage, createdImage]);
+        setScore(Math.floor(correctPixels / 225 * 100));
+        
+    });
 
     return(
     <>
