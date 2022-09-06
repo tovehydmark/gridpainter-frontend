@@ -5,7 +5,7 @@ export function Checkimage({socket}){
 
     const [defaultImage, setDefaultImage] = useState([]);
     const [createdImage, setCreatedImage] = useState([]);
-    const [score, setScore] = useState(false);
+    const [score, setScore] = useState(0);
 
 
     socket.on('default_image', function(img){
@@ -45,7 +45,7 @@ export function Checkimage({socket}){
 
     return(
     <>
-        {score || score === 0 && <div>Image is {score}% accurate</div>}
+        {<div>Image is {score}% accurate</div>}
     </>
     );
 }
