@@ -71,12 +71,11 @@ function App() {
         
         setCount(i);
 
-    //ta bort kommentaren här när allt annat funkar
-        // if(i == 0){
-        //     socket.disconnect();
-        //     setInGame(false);
-        //     window.location.reload();
-        // }
+        if(i == 0){
+            socket.disconnect();
+            setInGame(false);
+            window.location.reload();
+        }
     }, 1000);
 
   });
