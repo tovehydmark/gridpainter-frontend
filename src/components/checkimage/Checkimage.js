@@ -6,34 +6,7 @@ export function Checkimage({socket}){
     const [defaultImage, setDefaultImage] = useState([]);
     const [createdImage, setCreatedImage] = useState([]);
     const [score, setScore] = useState(false);
-    const [timerDone, setTimerDone] = useState(false);
 
-
-
-    // socket.on('timerDone', function(){
-
-    //     console.log('timerDone, score check');
-    //     console.log('default image', defaultImage);
-    //     console.log('created image', createdImage);
-
-    //     let correctPixels = 0;
-
-    //     for(let i = 0; i < 225; i++){
-
-    //         if(defaultImage[i].color == createdImage[i].color){
-    //             correctPixels++;
-    //         }
-    //     }
-
-    //     setScore(Math.floor(correctPixels / 225 * 100));
-        
-    // });
-
-    // socket.on('timerDone', function(){
-    //     setTimerDone(true);
-    // });
-
- 
 
     socket.on('default_image', function(img){
         if(img.length > 0){
@@ -72,7 +45,7 @@ export function Checkimage({socket}){
 
     return(
     <>
-        {/*score || score === 0 &&*/ <div>Image is {score}% accurate</div>}
+        {score || score === 0 && <div>Image is {score}% accurate</div>}
     </>
     );
 }
