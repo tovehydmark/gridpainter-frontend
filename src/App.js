@@ -46,7 +46,6 @@ function App() {
   });
 
   socket.on('disableSaveButton', function(){
-    console.log('disable save button');
     setDisableSave(true);
     setSaveButtonStyle('gray');
   });
@@ -97,16 +96,13 @@ function App() {
 
   function sendTilesToApp(tiles) {
     setTilesFromTileJS(tiles); // Ta emot tiles att spara från Tile.js
-    console.log(tiles);
   }
 
   function saveImg(tilesFromTileJS) {
-    console.log(tilesFromTileJS);
     try {
       axios
         .post('https://grid-painter-backend.herokuapp.com', tilesFromTileJS)
         .then((res) => {
-          console.log(res);
         });
     } catch (err) {
       console.log(err);

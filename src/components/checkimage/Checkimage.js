@@ -1,5 +1,5 @@
 import './Checkimage.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export function Checkimage({socket}){
 
@@ -34,7 +34,7 @@ export function Checkimage({socket}){
 
     return(
     <>
-        {score || score === 0 && <div>Image is {score}% accurate</div>}
+        {/*score || score === 0 &&*/ <div>Image is {score}% accurate</div>}
     </>
     );
 }
