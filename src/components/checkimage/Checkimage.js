@@ -1,40 +1,74 @@
 import './Checkimage.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function Checkimage({socket}){
 
     const [defaultImage, setDefaultImage] = useState([]);
     const [createdImage, setCreatedImage] = useState([]);
     const [score, setScore] = useState(false);
+    const [timerDone, setTimerDone] = useState(false);
+
+
+
+    // socket.on('timerDone', function(){
+
+    //     console.log('timerDone, score check');
+    //     console.log('default image', defaultImage);
+    //     console.log('created image', createdImage);
+
+    //     let correctPixels = 0;
+
+    //     for(let i = 0; i < 225; i++){
+
+    //         if(defaultImage[i].color == createdImage[i].color){
+    //             correctPixels++;
+    //         }
+    //     }
+
+    //     setScore(Math.floor(correctPixels / 225 * 100));
+        
+    // });
+
+    // socket.on('timerDone', function(){
+    //     setTimerDone(true);
+    // });
+
+ 
 
     socket.on('default_image', function(img){
-        setDefaultImage(img);
-        console.log('default image', defaultImage);
+        if(img.length > 0){
+            setDefaultImage(img);
+            console.log('default image', defaultImage);
+        }
+        
     });
 
     socket.on('created_image', function(img){
-        setCreatedImage(img);
-        console.log('created image', createdImage);
+        if(img.length > 0){
+            setCreatedImage(img);
+            console.log('created image', createdImage);
+        }
     });
 
-    socket.on('timerDone', function(){
+  
 
-        console.log('timerDone, score check');
-        console.log('default image', defaultImage);
-        console.log('created image', createdImage);
 
-        let correctPixels = 0;
+    useEffect(() => {
 
-        for(let i = 0; i < 225; i++){
+        if(defaultImage.length > 0 && createdImage.length > 0){
+            let correctPixels = 0;
 
-            if(defaultImage[i].color == createdImage[i].color){
-                correctPixels++;
+            for(let i = 0; i < 225; i++){
+
+                if(defaultImage[i].color == createdImage[i].color){
+                    correctPixels++;
+                }
             }
+
+            setScore(Math.floor(correctPixels / 225 * 100));
         }
 
-        setScore(Math.floor(correctPixels / 225 * 100));
-        
-    });
+    }, [defaultImage, createdImage]);
 
     return(
     <>

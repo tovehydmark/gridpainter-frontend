@@ -12,7 +12,7 @@ export function Timer({ socket }) {
   });
 
   socket.on('countdownTimer', (timer) => {
-    if(timer <= 0){
+    if(timer === 0){
       setShowTimer(true);
     }
   });
