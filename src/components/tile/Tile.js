@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './Tile.scss';
 
@@ -64,6 +63,11 @@ export function Tile({ color, socket, sendTilesToApp }) {
   socket.on('timerDone', function(){
     setCanPaint(false);
     socket.emit('created_image', tiles);
+    
+
+    setTimeout(() => {
+        socket.disconnect();
+    }, 1000);
   })
 
   useEffect(() => {

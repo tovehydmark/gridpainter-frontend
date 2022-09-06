@@ -11,8 +11,8 @@ import { Checkimage } from './components/checkimage/Checkimage';
 
 const io = require('socket.io-client');
 
-const socket = io.connect('https://grid-painter-backend.herokuapp.com');
-// const socket = io.connect('http://localhost:4000');
+// const socket = io.connect('https://grid-painter-backend.herokuapp.com');
+const socket = io.connect('http://localhost:4000');
 
 function App() {
   const [inGame, setInGame] = useState(false);
@@ -62,23 +62,23 @@ function App() {
   }
 
   function saveImg(tilesFromTileJS) {
-    try {
-      axios
-        .post('https://grid-painter-backend.herokuapp.com', tilesFromTileJS)
-        .then((res) => {
-          console.log(res);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-
     // try {
-    //   axios.post('http://localhost:4000', tilesFromTileJS).then((res) => {
-    //     console.log(res);
-    //   });
+    //   axios
+    //     .post('https://grid-painter-backend.herokuapp.com', tilesFromTileJS)
+    //     .then((res) => {
+    //       console.log(res);
+    //     });
     // } catch (err) {
     //   console.log(err);
     // }
+
+    try {
+      axios.post('http://localhost:4000', tilesFromTileJS).then((res) => {
+        console.log(res);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -91,11 +91,6 @@ function App() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <input
-              placeholder="ROOM"
-              value={roomName}
-              onChange={(e) => setRoomName(e.target.value)}
-            />
             <button id="login-btn">START PAINTING</button>
           </form>
           <Link to="/artGallery" id="to-art-gallery-btn">
@@ -106,7 +101,9 @@ function App() {
         <>
           <div className="loggedin-container">
             <h1>
-              Welcome to Grid painter {username}, <br /> You are {color}!
+              Welcome to Grid painter {username}
+              <br/>
+              {color && <p>You are <span style={{color: color}}>{color}!</span></p>}
             </h1>
             <section>
               <div className="grid-container">
@@ -128,8 +125,6 @@ function App() {
                 VIEW GALLERY
               </Link>
               <button onClick={() => saveImg(tilesFromTileJS)}>SAVE</button>
-              <button>START</button>
-              <button>DONE</button>
             </div>
           </div>
           <div id="chat-container">
