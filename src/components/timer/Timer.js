@@ -19,7 +19,7 @@ export function Timer({ socket }) {
 
   return (
     <>
-      <div className="timer">{showTimer && gameTimer > 0 && 'Time left: ' + gameTimer + ' sec' || gameTimer <= 0 && 'Game finished'}</div>
+      <div className="timer">{showTimer && gameTimer > 0 && 'Time left: ' + gameTimer + ' sec'}</div>
     </>
   );
 }

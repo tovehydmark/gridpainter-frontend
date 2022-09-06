@@ -21,6 +21,10 @@ function App() {
   const [color, setColor] = useState('');
   const [getImage, setGetImage] = useState(false);
   const [tilesFromTileJS, setTilesFromTileJS] = useState([]);
+  const [disableSave, setDisableSave] = useState(true);
+  const [saveButtonStyle, setSaveButtonStyle] = useState('gray');
+  const [gameOver, setGameOver] = useState(false);
+  const [count, setCount] = useState(10);
 
   socket.on('userData', (data) => {
     setColor(data);
@@ -40,6 +44,41 @@ function App() {
       alert('Game is full');
     }
   });
+
+  socket.on('disableSaveButton', function(){
+    console.log('disable save button');
+    setDisableSave(true);
+    setSaveButtonStyle('gray');
+  });
+
+  socket.on('enableSaveButton', function(){
+    setDisableSave(false);
+    setSaveButtonStyle('#22cf29');
+  });
+
+  //disconnect 10 sec after game ends.
+  socket.on('timerDone', function(){
+
+    setGameOver(true);
+
+    let i = 10;
+
+    setInterval(() => {
+
+        if(i > 0){
+            i--;
+        }
+        
+        setCount(i);
+
+        if(i == 0){
+            socket.disconnect();
+            setInGame(false);
+            window.location.reload();
+        }
+    }, 1000);
+
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,6 +101,7 @@ function App() {
   }
 
   function saveImg(tilesFromTileJS) {
+    console.log(tilesFromTileJS);
     try {
       axios
         .post('https://grid-painter-backend.herokuapp.com', tilesFromTileJS)
@@ -120,11 +160,15 @@ function App() {
             <CountdownTimer socket={socket} />
             <Timer socket={socket} />
             <Checkimage socket={socket} />
+            {gameOver && <p>Game over, you will be disconnected in {count} seconds.</p>}
             <div className="button-container">
               <Link to="/artGallery" id="to-art-gallery-btn">
                 VIEW GALLERY
               </Link>
-              <button onClick={() => saveImg(tilesFromTileJS)}>SAVE</button>
+              {<button style={{backgroundColor: saveButtonStyle}} disabled={disableSave} onClick={() => {
+                    saveImg(tilesFromTileJS);
+                    socket.emit('disableSaveButtonClient');
+              }}>SAVE</button>}
             </div>
           </div>
           <div id="chat-container">
