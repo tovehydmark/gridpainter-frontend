@@ -61,8 +61,8 @@ export function Tile({ color, socket, sendTilesToApp }) {
   });
 
   socket.on('timerDone', function(){
-    socket.emit('created_image', tiles);
-  })
+    socket.emit('created_image', tiles); //denna körs i en loop av någon anledning
+  });
 
   useEffect(() => {
     socket.emit('loadIn');
