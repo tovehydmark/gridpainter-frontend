@@ -70,11 +70,11 @@ function App() {
         
         setCount(i);
 
-        if(i == 0){
-            socket.disconnect();
-            setInGame(false);
-            window.location.reload();
-        }
+        // if(i == 0){
+        //     socket.disconnect();
+        //     setInGame(false);
+        //     window.location.reload();
+        // }
     }, 1000);
 
   })
