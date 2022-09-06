@@ -8,7 +8,7 @@ export function CountdownTimer({ socket }) {
     setCountDown(timer);
     console.log(timer);
 
-    if(timer <= 0){
+    if(timer === 0){
       socket.emit('canPaint');
     }
   });

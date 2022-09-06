@@ -1,7 +1,7 @@
 import './App.scss';
 import { Chat } from './components/chat/Chat';
 import { Tile } from './components/tile/Tile.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GetImage } from './components/getImage/GetImage';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -11,8 +11,8 @@ import { Checkimage } from './components/checkimage/Checkimage';
 
 const io = require('socket.io-client');
 
-const socket = io.connect('https://grid-painter-backend.herokuapp.com');
-// const socket = io.connect('http://localhost:4000');
+// const socket = io.connect('https://grid-painter-backend.herokuapp.com');
+const socket = io.connect('http://localhost:4000');
 
 function App() {
   const [inGame, setInGame] = useState(false);
@@ -29,6 +29,7 @@ function App() {
   socket.on('userData', (data) => {
     setColor(data);
   });
+
 
   socket.on('joinedRoom', (response) => {
     if (response === 'available') {
@@ -70,6 +71,7 @@ function App() {
         
         setCount(i);
 
+    //ta bort kommentaren här när allt annat funkar
         // if(i == 0){
         //     socket.disconnect();
         //     setInGame(false);
@@ -77,7 +79,7 @@ function App() {
         // }
     }, 1000);
 
-  })
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -99,22 +101,22 @@ function App() {
   }
 
   function saveImg(tilesFromTileJS) {
-    try {
-      axios
-        .post('https://grid-painter-backend.herokuapp.com', tilesFromTileJS)
-        .then((res) => {
-        });
-    } catch (err) {
-      console.log(err);
-    }
-
     // try {
-    //   axios.post('http://localhost:4000', tilesFromTileJS).then((res) => {
-    //     console.log(res);
-    //   });
+    //   axios
+    //     .post('https://grid-painter-backend.herokuapp.com', tilesFromTileJS)
+    //     .then((res) => {
+    //     });
     // } catch (err) {
     //   console.log(err);
     // }
+
+    try {
+      axios.post('http://localhost:4000', tilesFromTileJS).then((res) => {
+        console.log(res);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
