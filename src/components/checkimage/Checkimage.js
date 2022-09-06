@@ -18,6 +18,9 @@ export function Checkimage({socket}){
     socket.on('timerDone', function(){
 
         console.log('timerDone, score check');
+        console.log('default image', defaultImage);
+        console.log('--------------------------');
+        console.log('created image', createdImage);
 
         let correctPixels = 0;
 
