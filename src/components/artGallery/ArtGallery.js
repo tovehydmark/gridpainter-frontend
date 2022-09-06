@@ -6,10 +6,10 @@ export function ArtGallery() {
   const [artGallery, setArtGallery] = useState([]);
 
   async function getArtGallery() {
-    // let res = await axios.get(
-    //   'https://grid-painter-backend.herokuapp.com/saved_images'
-    // );
-    let res = await axios.get('http://localhost:4000/saved_images');
+    let res = await axios.get(
+      'https://grid-painter-backend.herokuapp.com/saved_images'
+    );
+    // let res = await axios.get('http://localhost:4000/saved_images');
 
     setArtGallery(res.data);
     console.log(res.data);
