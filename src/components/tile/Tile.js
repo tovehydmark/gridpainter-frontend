@@ -83,7 +83,6 @@ export function Tile({ color, socket, sendTilesToApp }) {
   // }
 
   useEffect(() => {
-    console.log(tiles);
     sendTilesToApp(tiles);
   }, [tiles]);
 
