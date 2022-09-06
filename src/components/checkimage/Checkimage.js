@@ -9,17 +9,18 @@ export function Checkimage({socket}){
 
     socket.on('default_image', function(img){
         setDefaultImage(img);
+        console.log('default image', defaultImage);
     });
 
     socket.on('created_image', function(img){
         setCreatedImage(img);
+        console.log('created image', createdImage);
     });
 
     socket.on('timerDone', function(){
 
         console.log('timerDone, score check');
         console.log('default image', defaultImage);
-        console.log('--------------------------');
         console.log('created image', createdImage);
 
         let correctPixels = 0;
