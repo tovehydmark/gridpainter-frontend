@@ -5,7 +5,6 @@ import './GetImage.scss';
 
 export function GetImage({ getImage, socket }) {
   const [image, setImage] = useState([]);
-  const [counter, setCounter] = useState(5);
 
   async function getRandomImage() {
     let res = await axios.get(
@@ -22,6 +21,7 @@ export function GetImage({ getImage, socket }) {
   //Se till att timern slutar köras med clearInterval (https://usehooks-ts.com/react-hook/use-interval)
   useEffect(() => {
     socket.on('randomImageFromServer', function (image) {
+        console.log('randomImageFromServer', image);
       setImage(image);
       socket.emit('default_image', image);
     });
