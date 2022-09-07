@@ -5,6 +5,7 @@ export function Tile({ color, socket, sendTilesToApp }) {
 
   const [tiles, setTiles] = useState([]);
   const [canPaint, setCanPaint] = useState(false);
+  const [timerDone, setTimerDone] = useState(false);
 
   
   function handleClickOnTile(e) {
@@ -61,11 +62,17 @@ export function Tile({ color, socket, sendTilesToApp }) {
   });
 
   socket.on('timerDone', function(){
-    socket.emit('created_image', tiles); //denna körs i en loop av någon anledning
+    
+    if(timerDone === false){
+        setTimerDone(true);
+        socket.emit('created_image', tiles); //denna körs i en loop av någon anledning
+    }
+    
   });
 
   useEffect(() => {
     socket.emit('loadIn');
+    setTimerDone(false);
   }, []);
 
   // function saveImg(tiles) {
