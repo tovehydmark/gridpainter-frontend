@@ -56,7 +56,7 @@ function App() {
     setSaveButtonStyle('#22cf29');
   });
 
-  //disconnect 10 sec after game ends.
+  //disconnect 30 sec after game ends.
   socket.on('timerDone', function(){
 
     setGameOver(true);

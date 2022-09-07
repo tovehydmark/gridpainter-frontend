@@ -23,9 +23,9 @@ export function ArtGallery() {
   return (
     <div className="outer-div">
       {artGallery.length > 0 &&
-        artGallery.map((gallery) => {
+        artGallery.map((gallery, i) => {
           return (
-            <div className="grid-container">
+            <div className="grid-container" key={i}>
               {gallery.tiles.map((tile, i) => {
                 return (
                   <div
