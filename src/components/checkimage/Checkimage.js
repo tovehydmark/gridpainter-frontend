@@ -12,15 +12,14 @@ export function Checkimage({socket}){
     socket.on('default_image', function(img){
         if(img.length > 0){
             setDefaultImage(img);
-            console.log('default image', img);
-        }
-        
+            //console.log('default', img);
+        }   
     });
 
     socket.on('created_image', function(img){
         if(img.length > 0){
             setCreatedImage(img);
-            console.log('created image', img);
+            //console.log('created', img);
         }
     });
 
@@ -28,7 +27,6 @@ export function Checkimage({socket}){
         setTimerDone(true);
     });
 
-  
 
 
     useEffect(() => {
