@@ -8,7 +8,7 @@ export function Checkimage({socket}){
     const [score, setScore] = useState(0);
     const [timerDone, setTimerDone] = useState(false);
 
-
+    //Hämtar "facit bilden"
     socket.on('default_image', function(img){
         if(img.length > 0){
             setDefaultImage(img);
@@ -16,6 +16,7 @@ export function Checkimage({socket}){
         }   
     });
 
+    //Hämtar den "ritade bilden"
     socket.on('created_image', function(img){
         if(img.length > 0){
             setCreatedImage(img);
@@ -28,7 +29,7 @@ export function Checkimage({socket}){
     });
 
 
-
+    //Jämför pixlar i den "ritade bilden" med "facit bilden" och kollar hur många stämmer överens, i procent
     useEffect(() => {
 
         if(defaultImage.length > 0 && createdImage.length > 0){

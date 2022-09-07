@@ -6,17 +6,14 @@ import './GetImage.scss';
 export function GetImage({ getImage, socket }) {
   const [image, setImage] = useState([]);
 
+  //Hämtar bilden och emittar den till alla andra spelare.
   async function getRandomImage() {
     let res = await axios.get('https://grid-painter-backend.herokuapp.com/default');
-
     // let res = await axios.get('http://localhost:4000/default');
     socket.emit('randomImageFromServer', res.data[0].tiles);
-    //setImage(res.data[0].tiles);
-    // setTilesArr(res.data[0].tiles);
-    // console.log('random :', res.data[0].tiles);
   }
 
-  //Se till att timern slutar köras med clearInterval (https://usehooks-ts.com/react-hook/use-interval)
+  //Hämtar och sparar bilden man ska måla.
   useEffect(() => {
     socket.on('randomImageFromServer', function (image) {
       setImage(image);
@@ -24,6 +21,7 @@ export function GetImage({ getImage, socket }) {
     });
   }, []);
 
+  //När fjärde spelaren loggar in så hämtas en bild.
   useEffect(() => {
     if (getImage) {
       getRandomImage();
@@ -32,26 +30,6 @@ export function GetImage({ getImage, socket }) {
 
   return (
     <>
-      {/* {counter > 0 ? (
-        <div>
-          <p>Get ready to play in: {counter} </p>
-        </div>
-      ) : (
-        <div> Timer som tickar ned </div>
-      )}
-
-      {counter <= 0 &&
-        image.map((tile, i) => {
-          return (
-            <div
-              id="i"
-              key={i}
-              style={{ backgroundColor: tile.color }}
-              className="grid-tile"
-            ></div>
-          );
-        })} */}
-
       {image.map((tile, i) => {
         return (
           <div

@@ -3,14 +3,14 @@ import './Timer.scss';
 
 export function Timer({ socket }) {
   const [gameTimer, setGameTimer] = useState(30);
-  const [countDown, setCountDown] = useState(5);
   const [showTimer, setShowTimer] = useState(false);
 
+  //Sätter värdet på timer.
   socket.on('timer', (timer) => {
     setGameTimer(timer);
-    console.log(timer);
   });
 
+  //Visar speltimern när countdowntimern är 0.
   socket.on('countdownTimer', (timer) => {
     if(timer === 0){
       setShowTimer(true);
