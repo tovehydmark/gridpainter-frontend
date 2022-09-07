@@ -7,9 +7,7 @@ export function GetImage({ getImage, socket }) {
   const [image, setImage] = useState([]);
 
   async function getRandomImage() {
-    let res = await axios.get(
-      'https://grid-painter-backend.herokuapp.com/default'
-    );
+    let res = await axios.get('https://grid-painter-backend.herokuapp.com/default');
 
     // let res = await axios.get('http://localhost:4000/default');
     socket.emit('randomImageFromServer', res.data[0].tiles);
