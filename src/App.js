@@ -12,7 +12,6 @@ import { Checkimage } from './components/checkimage/Checkimage';
 const io = require('socket.io-client');
 
 const socket = io.connect('https://grid-painter-backend.herokuapp.com');
-// const socket = io.connect('http://localhost:4000');
 
 function App() {
   const [inGame, setInGame] = useState(false);
@@ -24,7 +23,7 @@ function App() {
   const [disableSave, setDisableSave] = useState(true);
   const [saveButtonStyle, setSaveButtonStyle] = useState('gray');
   const [gameOver, setGameOver] = useState(false);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(30);
 
   socket.on('userData', (data) => {
     setColor(data);
@@ -32,15 +31,13 @@ function App() {
 
 
   socket.on('joinedRoom', (response) => {
-    if (response === 'available') {
-      //Här ska det gå att logga in
+
+    if (response === 'available') { //Spelvy visas för spelaren
       setInGame(true);
-    } else if (response === 'getImage') {
-      //when 4 players are ready
+    } else if (response === 'getImage') { //Hämtar bild från db när 4 är inloggade och timer startas
       setInGame(true);
       setGetImage(true);
       socket.emit('startCountdownTimer');
-      // socket.emit('startTimer');
     } else {
       alert('Game is full');
     }
@@ -56,22 +53,18 @@ function App() {
     setSaveButtonStyle('#22cf29');
   });
 
-  //disconnect 30 sec after game ends.
+  //Disconnectar alla spelare efter 30 sek och laddar om sidan så att ett nytt spel kan startas
   socket.on('timerDone', function(){
-
     setGameOver(true);
-
-    let i = 10;
+    let i = 30;
 
     setInterval(() => {
-
         if(i > 0){
             i--;
         }
-        
         setCount(i);
 
-        if(i == 0){
+        if(i === 0){
             socket.disconnect();
             setInGame(false);
             window.location.reload();
@@ -88,17 +81,19 @@ function App() {
         { username: username, roomName: roomName },
         (error) => {
           if (error) {
-            alert(error);
+            console.log(error);
           }
         }
       );
     }
   };
 
+  //Funktion som körs från Tile.js via props när spelare färglägger en ruta genom att klicka på en tile
   function sendTilesToApp(tiles) {
-    setTilesFromTileJS(tiles); // Ta emot tiles att spara från Tile.js
+    setTilesFromTileJS(tiles); //Uppdaterad array med alla färgade tiles
   }
 
+  //Färdig bild sparas till databasen
   function saveImg(tilesFromTileJS) {
     try {
       axios
@@ -108,18 +103,11 @@ function App() {
     } catch (err) {
       console.log(err);
     }
-
-    // try {
-    //   axios.post('http://localhost:4000', tilesFromTileJS).then((res) => {
-    //     console.log(res);
-    //   });
-    // } catch (err) {
-    //   console.log(err);
-    // }
   }
 
   return (
     <div id="body">
+      {/* Visar login-vy om inGame är false, annars visas spelvy */}
       {!inGame ? (
         <div className="login-page-container">
           <form onSubmit={handleSubmit}>
@@ -130,8 +118,8 @@ function App() {
             />
             <button id="login-btn">START PAINTING</button>
           </form>
-          <Link to="/artGallery" id="to-art-gallery-btn">
-            View art gallery
+          <Link to="/artGallery" className="to-art-gallery-btn">
+            VIEW ART GALLERY
           </Link>
         </div>
       ) : (
@@ -148,10 +136,10 @@ function App() {
                   color={color}
                   socket={socket}
                   sendTilesToApp={sendTilesToApp}
-                ></Tile>
+                />
               </div>
               <div className="grid-container">
-                <GetImage getImage={getImage} socket={socket}></GetImage>
+                <GetImage getImage={getImage} socket={socket} />
               </div>
             </section>
             <CountdownTimer socket={socket} />
@@ -159,9 +147,10 @@ function App() {
             <Checkimage socket={socket} />
             {gameOver && <p>Game over, you will be disconnected in {count} seconds.</p>}
             <div className="button-container">
-              <Link to="/artGallery" id="to-art-gallery-btn">
+              <Link to="/artGallery">
                 VIEW GALLERY
               </Link>
+              
               {<button style={{backgroundColor: saveButtonStyle}} disabled={disableSave} onClick={() => {
                     saveImg(tilesFromTileJS);
                     socket.emit('disableSaveButtonClient');

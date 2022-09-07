@@ -6,11 +6,9 @@ export function Chat({ socket, username, roomName }) {
   const [msgToBeSent, setMsgToBeSent] = useState('');
   const [allMessages, setAllMessages] = useState([]);
 
+  //Skickar meddelanden.
   function submit(e) {
     e.preventDefault();
-
-    console.log(msgToBeSent);
-    console.log(username);
 
     if (msgToBeSent) {
       socket.emit('message', {
@@ -21,6 +19,8 @@ export function Chat({ socket, username, roomName }) {
       setMsgToBeSent('');
     }
   }
+
+  //Tar emot och visar meddelanden.
   useEffect(() => {
     socket.on('message', function (msg, username) {
       setAllMessages((prev) => [

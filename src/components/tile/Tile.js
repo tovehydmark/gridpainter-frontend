@@ -7,7 +7,7 @@ export function Tile({ color, socket, sendTilesToApp }) {
   const [canPaint, setCanPaint] = useState(false);
   const [timerDone, setTimerDone] = useState(false);
 
-  
+  //Hanterar klick på rutor
   function handleClickOnTile(e) {
     if(canPaint == true){
       if (e.target.style.backgroundColor == color) {
@@ -19,7 +19,7 @@ export function Tile({ color, socket, sendTilesToApp }) {
   }
 
  
-
+  //Skapar en array utav alla pixlar och sätter dem till rätt färg
   function loopThroughTiles(tileList) {
     setTiles([]);
 
@@ -65,7 +65,7 @@ export function Tile({ color, socket, sendTilesToApp }) {
     
     if(timerDone === false){
         setTimerDone(true);
-        socket.emit('created_image', tiles); //denna körs i en loop av någon anledning
+        socket.emit('created_image', tiles); 
     }
     
   });
@@ -74,20 +74,6 @@ export function Tile({ color, socket, sendTilesToApp }) {
     socket.emit('loadIn');
     setTimerDone(false);
   }, []);
-
-  // function saveImg(tiles) {
-  //   //Spara tiles till databasen här
-
-  //   console.log(tiles);
-
-  //   try {
-  //     axios.post('http://localhost:4000', tiles).then((res) => {
-  //       console.log(res);
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
 
   useEffect(() => {
     sendTilesToApp(tiles);
@@ -105,8 +91,7 @@ export function Tile({ color, socket, sendTilesToApp }) {
             style={{ backgroundColor: tile.color }}
           ></div>
         );
-      })}
-      {/* <button onClick={() => saveImg(tiles)}>SAVE</button> */}
+      })}      
     </>
   );
 }

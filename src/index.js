@@ -8,13 +8,10 @@ import { ArtGallery } from './components/artGallery/ArtGallery';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  // <React.StrictMode>
   <HashRouter>
     <Routes>
       <Route path="/" element={<App />}></Route>
       <Route path="/artGallery" element={<ArtGallery></ArtGallery>}></Route>
     </Routes>
   </HashRouter>
-
-  // </React.StrictMode>
 );
