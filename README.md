@@ -1,5 +1,5 @@
 # gridpainter-frontend
-Ett spel där fyra spelare ska rita en bild så lik som möjligt som en slumpad bild. Spelarna kan även chatta med varandra. 
+Ett spel där fyra spelare på tid ska rita av en slumpad bild. Spelarna kan även chatta med varandra.
 
 
 -----------------------------
@@ -7,9 +7,7 @@ Projektet är byggt i react.
 
 För att starta projektet:
 
-npm install
-
-npm start
+npm install samt npm start
 
 
 ----------------------------
