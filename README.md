@@ -20,3 +20,11 @@ Backend repository: https://github.com/tovehydmark/gridpainter-backend.git
 
 ----------------------------
 
+Skapat av: 
+Alexander Rusiecki
+Jenny Höök
+Kirill Missarov
+Malcom Dahling
+Nathalie Persson
+Nikola Salamurovic
+Tove Hydmark
