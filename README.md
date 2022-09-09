@@ -26,7 +26,7 @@ Jenny Höök
 
 Kirill Missarov
 
-Malcom Dahling
+Malcolm Dahling
 
 Nathalie Persson
 
